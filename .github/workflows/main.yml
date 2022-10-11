@@ -22,6 +22,5 @@ jobs:
           node-version: 16
 
       - run: node -v
-      - run: cd app
       - run: npm install
 
