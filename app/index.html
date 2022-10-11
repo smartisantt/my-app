@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contaienr">
+      <p>name:<span id="name"></span></p>
+      <p>email:<span id="email"></span></p>
+      <p>interest:<span id="interest"></span></p>
+    </div>
+    <div class="edit">
+      <p>name:<input id="edit-name"></input></p>
+      <p>email:<input id="edit-email"></input></p>
+      <p>interest:<input id="edit-interest"></input></p>
+    </div>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <script>
+      const btn = document.querySelector('#get');
+      const post = document.querySelector('#post');
+      const myname = document.querySelector('#name');
+      const myemail = document.querySelector('#email');
+      const myinterest = document.querySelector('#interest');
+
+      const editname = document.querySelector('#edit-name');
+      const editemail = document.querySelector('#edit-email');
+      const editinterest = document.querySelector('#edit-interest');
+      btn.addEventListener('click', function () {
+        fetch('/get-profile')
+          .then((res) => res.json())
+          .then((res) => {
+            myname.innerHTML = res.name;
+            myemail.innerHTML = res.email;
+            myinterest.innerHTML = res.interest;
+          });
+      });
+
+      post.addEventListener('click', function(){
+        const data = {name:editname.value, email:editemail.value, interest:editinterest.value };
+         
+        const body = JSON.stringify(data);
+        fetch('/update-profile',  {method: 'POST',  
+         headers: {'Content-Type': 'application/json'}, body}).then(res=>res.json()).then(res=>{
+            console.log(res)
+        })
+      })
+    </script>
+  </body>
+</html>
