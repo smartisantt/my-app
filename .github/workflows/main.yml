@@ -35,7 +35,6 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v3
-        working-directory: ./
         with:
           push: true
           tags: ququ250/my-app:latest
