@@ -19,6 +19,9 @@ jobs:
       - name: Node Build
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 16
         run: node -v
+
+      - run: cd /app
+      - run: npm install
 
